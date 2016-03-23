@@ -1,0 +1,56 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-image: url('../../assets/img/grey.jpg');
+    background-repeat: ;
+}
+
+@media screen and (max-width: 991px) {
+    .main { 
+        border-right: none!important;
+    }
+}
+
+.container {
+    margin-top: 3%;
+}
+
+.footer {
+    background-color: #FFF;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    margin-top: 3%;
+    height: 30px;
+}
+
+.wrapper {
+    background-color: #FFF;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.main {
+    float: left;
+    border-right: 1px solid #EAEAEA;
+}
+
+.right-sidebar {
+    padding: 10px;
+}
+
+.navbar-inverse {
+    border: none;
+}
+
+.dropdown:hover {
+    background-color: #1C8800;
+}
+
+.logo {
+	margin-bottom: 2%;
+}
