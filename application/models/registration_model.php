@@ -71,7 +71,7 @@ class registration_model extends CI_Model
             'technologies' => $this->input->post('technology'),
             'team_moto' => $this->input->post('team_moto'),
             'inspiration' => $this->input->post('inspiration'),
-            'code' => sha1($this->input->post('inspiration')),
+            'code' => sha1($this->input->post('email1')),
         );
 
         $data2 = array(
