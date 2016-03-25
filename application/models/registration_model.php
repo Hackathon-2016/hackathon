@@ -73,6 +73,9 @@ class registration_model extends CI_Model
             'inspiration' => $this->input->post('inspiration'),
             'code' => sha1($this->input->post('email1')),
         );
+        //The insert MUST be befot the $this->db->insert_id()! And also is better is to be here because 
+        //it is close to the corresponding $data.
+        $this->db->insert('teams', $data);
 
         $data2 = array(
             'team' => $this->db->insert_id(),
@@ -90,7 +93,7 @@ class registration_model extends CI_Model
             'occupation' => $this->input->post('occupation2'),
             'tshirt' => $this->input->post('tshirt2'),
         );
-        $this->db->insert('teams', $data);
+        
         $this->db->insert('members', $data2);
     }
 }
