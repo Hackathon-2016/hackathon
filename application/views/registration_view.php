@@ -1,4 +1,6 @@
+
 <?php
+echo validation_errors();
 echo form_open_multipart('registration/register_team');
 
 echo form_label('Име на екип :', 'team_name');
