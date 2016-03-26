@@ -1,3 +1,4 @@
+
 <div style="text-align: center;"><h2>Екип:</h2></div>
 <?php
 echo validation_errors();
@@ -303,7 +304,7 @@ foreach ($tshirt as $each) {
 echo form_error("tshirt[4]", '<div class="error" style="color: red;">', '</div>');
 ?>
 </div>
-<button class="add-participant col-md-offset-2">
+<button class="btn btn-default add-participant col-md-offset-2">
   Добави Участник
 </button>
 <div class="col-md-5 col-md-offset-1">
@@ -322,8 +323,16 @@ echo form_close();
 ?>
 </div>
 <script>
-    $(".participant:gt(1)").addClass("hidden");
+    $(document).on("keypress", ":input:not(textarea)", function(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+$(".participant:gt(1)").addClass("hidden");
 $(".add-participant").on("click", function() {
+    event.preventDefault();
     $(".participant.hidden").first().removeClass("hidden");
   if(!$(".participant.hidden").length) {
     $(this).hide();
