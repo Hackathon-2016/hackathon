@@ -15,6 +15,10 @@ body {
     }
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     margin-top: 3%;
 }
