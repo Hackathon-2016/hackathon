@@ -63,7 +63,7 @@ class registration_model extends CI_Model
         return $tshirt_data;
     }
 
-    public function register()
+    public function register($participants_count, $file_name)
     {
         $data = array(
             'team_name' => $this->input->post('team_name'),
@@ -72,43 +72,48 @@ class registration_model extends CI_Model
             'team_moto' => $this->input->post('team_moto'),
             'inspiration' => $this->input->post('inspiration'),
             'code' => sha1($this->input->post("email[0]")),
-            // 'team_logo' => $file_name,
+            'team_logo' => $file_name,
         );
         //The insert MUST be befot the $this->db->insert_id()! And also is better is to be here because
         //it is close to the corresponding $data.
         $this->db->insert('teams', $data);
+        $team_id = $this->db->insert_id();
         $data2 = array();
-        $count = count($this->input->post["first_name[]"]);
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $participants_count; $i++) {
             $data2[$i] = array(
                 'first_name' => $this->input->post("first_name[$i]"),
-                'last_name' => $address[$i],
+                'last_name' => $this->input->post("last_name[$i]"),
                 'age' => $this->input->post("age[$i]"),
                 'email' => $this->input->post("email[$i]"),
                 'occupation' => $this->input->post("occupation[$i]"),
                 'tshirt' => $this->input->post("tshirt[$i]"),
-                'team' => $this->db->insert_id(),
+                'team' => $team_id,
+                'is_captain' => null,
             );
-
         }
+        $data2[0]['is_captain'] = 1; //The first member is captain
         $this->db->insert_batch('members', $data2);
+    }
 
-        // $data2 = array(
-        //     'team' => $this->db->insert_id(),
-        //     'first_name' => $this->input->post('first_name1'),
-        //     'last_name' => $this->input->post('last_name1'),
-        //     'email' => $this->input->post('email1'),
-        //     'age' => $this->input->post('age1'),
-        //     'occupation' => $this->input->post('occupation1'),
-        //     'tshirt' => $this->input->post('tshirt1'),
-        //     'first_name' => $this->input->post('first_name2'),
-        //     'last_name' => $this->input->post('last_name2'),
-        //     'email' => $this->input->post('email2'),
-        //     'age' => $this->input->post('age2'),
-        //     'occupation' => $this->input->post('occupation2'),
-        //     'tshirt' => $this->input->post('tshirt2'),
-        // );
+    public function get_teams()
+    {
+        $this->db->from('teams');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
-        // $this->db->insert('members', $data2);
+    public function get_one_team($id)
+    {
+        $this->db->from('members');
+        $this->db->where('team', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function check_code($id_confirmation)
+    {
+        $this->db->set('is_confirmed', 1);
+        $this->db->where('code', $id_confirmation);
+        $this->db->update('teams');
     }
 }

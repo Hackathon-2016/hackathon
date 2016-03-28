@@ -1,14 +1,12 @@
-
 <div style="text-align: center;"><h2>Екип:</h2></div>
 <?php
-echo validation_errors();
-echo form_open_multipart('registration/register_team', array('class' => 'form-horizontal'));
+echo form_open_multipart('registration2/register_team', array('class' => 'form-horizontal'));
 ?>
 <div class="form-group row">
 <div class="col-md-4 col-md-offset-4">
 <?php
 echo form_label('Име на екип :', 'team_name');
-echo form_input('team_name', set_value('team_name'), array('class' => 'form-control'));
+echo form_input('team_name', set_value('team_name'), array('class' => 'form-control', 'required' => 'required'));
 echo form_error('team_name', '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Категория :', 'category');
@@ -19,7 +17,7 @@ echo form_label('Категория :', 'category');
 foreach ($category as $each) {
     ?>
 
-    <option value="<?=$each['category']?>"><?=$each['category']?></option>
+    <option value="<?=$each['category']?>"<?php echo set_select('category', '$each["category"]'); ?> ><?=$each['category']?></option>
     <?php
 }
 ?>
@@ -42,8 +40,12 @@ foreach ($technology as $each) {
 <?php
 echo form_error('technology', '<div class="error" style="color: red;">', '</div>');
 
+echo form_label('Github акаунт (на <a href="https://help.github.com/articles/creating-a-new-organization-from-scratch/" target="blank">организация</a> или на член от отбора) :', 'github_account');
+echo form_input('github_account', set_value('github_account'), array('class' => 'form-control', 'required' => 'required', 'placeholder' => 'http://github.com/hack_team1'));
+echo form_error('github_account', '<div class="error" style="color: red;">', '</div>');
+
 echo form_label('Мото на Екипа :');
-echo form_input('team_moto', set_value('team_moto'), array('class' => 'form-control'));
+echo form_input('team_moto', set_value('team_moto'), array('class' => 'form-control', 'required' => 'required'));
 ?>
 </div>
 </div>
@@ -53,24 +55,24 @@ echo form_input('team_moto', set_value('team_moto'), array('class' => 'form-cont
 <?php
 echo "<h3>Участник 1 (Капитан)</h3>";
 echo form_label('Име :', "first_name[0]");
-echo form_input("first_name[0]", set_value("first_name[0]"), array('class' => 'form-control'));
+echo form_input("first_name[0]", set_value("first_name[0]"), array('class' => 'form-control', 'required' => 'required', 'required' => 'required'));
 echo form_error("first_name[0]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Фамилия :', "last_name[0]");
-echo form_input("last_name[0]", set_value("last_name[0]"), array('class' => 'form-control'));
+echo form_input("last_name[0]", set_value("last_name[0]"), array('class' => 'form-control', 'required' => 'required', 'required' => 'required'));
 echo form_error("last_name[0]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('E-Mail :', "email[0]");
-echo form_input("email[0]", set_value("email[0]"), array('class' => 'form-control'));
+echo form_input("email[0]", set_value("email[0]"), array('class' => 'form-control', 'required' => 'required', 'required' => 'required'));
 echo form_error("email[0]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Възраст :', "age[0]");
-echo form_input("age[0]", set_value("age[0]"), array('class' => 'form-control'));
+echo form_input("age[0]", set_value("age[0]"), array('class' => 'form-control', 'required' => 'required', 'required' => 'required'));
 echo form_error("age[0]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Занимание :');
 ?>
-<select name="occupation[0]" class="form-control">
+<select name="occupation[0]" class="form-control" required="required">
 <option value=""></option>
 <?php
 foreach ($occupation as $each) {
@@ -84,7 +86,7 @@ foreach ($occupation as $each) {
 echo form_error("occupation[0]", '<div class="error" style="color: red;">', '</div>');
 echo form_label('Размер Тениска :', "tshirt[0]");
 ?>
-<select name="tshirt[0]" class="form-control">
+<select name="tshirt[0]" class="form-control" required="required">
 <option value=""></option>
 <?php
 foreach ($tshirt as $each) {
@@ -102,24 +104,24 @@ echo form_error("tshirt[0]", '<div class="error" style="color: red;">', '</div>'
 <?php
 echo "<h3>Участник 2</h3>";
 echo form_label('Име :', "first_name[1]");
-echo form_input("first_name[1]", set_value("first_name[1]"), array('class' => 'form-control'));
+echo form_input("first_name[1]", set_value("first_name[1]"), array('class' => 'form-control', 'required' => 'required'));
 echo form_error("first_name[1]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Фамилия :', "last_name[1]");
-echo form_input("last_name[1]", set_value("last_name[1]"), array('class' => 'form-control'));
+echo form_input("last_name[1]", set_value("last_name[1]"), array('class' => 'form-control', 'required' => 'required'));
 echo form_error("last_name[1]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('E-Mail :', "email[1]");
-echo form_input("email[1]", set_value("email[1]"), array('class' => 'form-control'));
+echo form_input("email[1]", set_value("email[1]"), array('class' => 'form-control', 'required' => 'required'));
 echo form_error("email[1]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Възраст :', "age[1]");
-echo form_input("age[1]", set_value("age[1]"), array('class' => 'form-control'));
+echo form_input("age[1]", set_value("age[1]"), array('class' => 'form-control', 'required' => 'required'));
 echo form_error("age[1]", '<div class="error" style="color: red;">', '</div>');
 
 echo form_label('Занимание :');
 ?>
-<select name="occupation[1]" class="form-control">
+<select name="occupation[1]" class="form-control" required="required">
 <option value=""></option>
 <?php
 foreach ($occupation as $each) {
@@ -134,7 +136,7 @@ echo form_error("occupation[1]", '<div class="error" style="color: red;">', '</d
 
 echo form_label('Размер Тениска :', "tshirt[1]");
 ?>
-<select name="tshirt[1]" class="form-control">
+<select name="tshirt[1]" class="form-control" required="required">
 <option value=""></option>
 <?php
 foreach ($tshirt as $each) {
@@ -304,7 +306,7 @@ foreach ($tshirt as $each) {
 echo form_error("tshirt[4]", '<div class="error" style="color: red;">', '</div>');
 ?>
 </div>
-<button class="btn btn-default add-participant col-md-offset-2">
+<button class="btn btn-success add-participant col-md-offset-2">
   Добави Участник
 </button>
 <div class="col-md-5 col-md-offset-1">
@@ -312,13 +314,13 @@ echo form_error("tshirt[4]", '<div class="error" style="color: red;">', '</div>'
 
 echo form_label('Технология или изобретение от 21-ви век, която ви вдъхновява (по желание): ');
 
-echo form_textarea('inspiration', set_value('inspiration'), array('class' => 'form-control', 'placeholder' => 'Facebook, stackoverflow, Tesla motors, wikipedia, YouTube...'));
+echo form_textarea('inspiration', set_value('inspiration'), array('class' => 'form-control', 'required' => 'required', 'placeholder' => 'Facebook, stackoverflow, Tesla motors, wikipedia, YouTube...'));
 
 echo form_label('Добавете Лого: ', 'upload');
-echo form_upload();
+echo form_upload('file');
 echo "<br/>";
 
-echo form_submit(array('class' => 'btn btn-default', 'value' => 'Запиши отбора'));
+echo form_submit(array('class' => 'btn btn-info', 'value' => 'Запиши отбора'));
 echo form_close();
 ?>
 </div>
